@@ -12,11 +12,13 @@ class WrapperView(BinaryView):
     @classmethod
     def is_valid_for_data(self, data):
         path = os.path.dirname(data.file.filename) + "/bninja_scripts"
-        print("LocalScriptLoader: Adding {} to path".format(
-                path
+        if path not in sys.path:
+            print("LocalScriptLoader: Adding {} to path".format(
+                    path
+                )
             )
-        )
-        sys.path.append(path)
+            sys.path.append(path)
+
         # Just a wrapper. Always fail
         return False
 
